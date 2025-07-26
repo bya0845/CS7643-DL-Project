@@ -5,7 +5,7 @@
 #SBATCH -t 2:00:00
 #SBATCH --gres=gpu:4 -C HX00 # change GPU count 
 #SBATCH --mem-per-gpu=128GB  
-#SBATCH -J CCT_MANUAL_PRUNING_FINAL
+#SBATCH -J job
 #SBATCH -o /home/hice1/byang364/scratch/cs7643-PACE/part2-pytorch/slurm_outs/%x_%j_%a.out
 #SBATCH --array=0-19
 
@@ -58,8 +58,7 @@ export PYTHONPATH="$CONDA_ENV_PATH/lib/python3.12/site-packages:$PYTHONPATH"
 # export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 # for 8 GPUs
 export CUDA_VISIBLE_DEVICES=0,1,2,3 # for 4 GPUs
 
-cd /home/hice1/byang364/scratch/cs7643-PACE/part2-pytorch/
-echo "Training started at $(date)"
+cd /home/hice1/byang364/scratch/cs7643-PACE/src
 
 accelerate launch \
     --multi_gpu \

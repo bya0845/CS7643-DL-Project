@@ -1,19 +1,19 @@
 #!/bin/bash
 #SBATCH -N 1
-#SBATCH --ntasks-per-node=4
+#SBATCH --ntasks-per-node=4 # set this equal to number of GPUs if using multiple
 #SBATCH --cpus-per-task=8
-#SBATCH -t 2:00:00
-#SBATCH --gres=gpu:4   # change GPU count -C HX00  
-#SBATCH --mem-per-gpu=128GB    
-#SBATCH -J CCT_MANUAL_PRUNING
-#SBATCH -o /home/hice1/byang364/scratch/cs7643-PACE/part2-pytorch/slurm_outs/%x_%j.out
+#SBATCH -t 2:00:00 # time limit
+#SBATCH --gres=gpu:4 -C HX00 # change GPU count
+#SBATCH --mem-per-gpu=128GB # mem to request per GPU, look up PACE documentation
+#SBATCH -J test_name # job name
+#SBATCH -o /home/hice1/username/scratch/cs7643-PACE/slurm_output/%x_%j.out
 
 export MODEL_NAME="cct_6_3x1_32" #cct_6_3x1_32 densenet121
 
-mkdir -p /home/hice1/byang364/scratch/cs7643-PACE/part2-pytorch/slurm_outs
+mkdir -p /home/hice1/byang364/scratch/cs7643-PACE/slurm_outs
 module load anaconda3/2023.03
 
-NUM_GPUS=4 # change if # of GPU changes
+NUM_GPUS=4 # change if # of GPUs changes
 
 echo "Setting up environment paths..."
 export CONDA_ENV_PATH="/home/hice1/byang364/scratch/cs7643-PACE"
@@ -25,7 +25,7 @@ export PYTHONPATH="$CONDA_ENV_PATH/lib/python3.12/site-packages:$PYTHONPATH"
 export CUDA_VISIBLE_DEVICES=0,1,2,3 # for 4 GPUs
 
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-8}
-cd /home/hice1/byang364/scratch/cs7643-PACE/part2-pytorch/
+cd /home/hice1/username/scratch/cs7643-PACE/src
 
 accelerate launch \
     --multi_gpu \

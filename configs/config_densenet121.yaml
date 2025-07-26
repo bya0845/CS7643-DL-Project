@@ -2,7 +2,7 @@ Train:
   batch_size: 128
   learning_rate: 0.25
   epochs: 50
-  # steps: [50, 75]   
+  steps: [50, 75]
   warmup: 5
   reg: 0.001
   momentum: 0.9
@@ -13,18 +13,18 @@ Train:
   nesterov: True 
   
 data:
-  save_best: True
-  dataset: Food101
+  save_best: True # option to save best model checkpoint
+  dataset: Food101 # only supports CIFAR-10 and Food101 for now
   img_size: 64
   output_filename: DenseNet121PrunedTest_PRUNED
 
 mlflow:
-  mlflow: True
-  experiment_name: Densenet121 Eval
-  training_info: Eval testing
-  training_title: Densenet121 Eval
+  mlflow: True # turn on/off mlflow logging
+  experiment_name: Densenet121 test
+  training_info: test run
+  training_title: test run
 
 pruning:
-  prune: True
-  prune_unstructured: 0.2
-  prune_structured: 0.2
+  prune: True # turn on/off the pruning method
+  prune_unstructured: 0.2 # percentage of L1 norm weights to zero via torch.prune
+  prune_structured: 0.2 # percentage of layers to remove

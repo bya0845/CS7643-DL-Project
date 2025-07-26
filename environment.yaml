@@ -1,4 +1,4 @@
-#replace with your own username/scratch directory
+#replace with your own username and scratch directory on PACE
 name: /home/hice1/user/scratch/cs7643-PACE
 channels:
   - defaults
