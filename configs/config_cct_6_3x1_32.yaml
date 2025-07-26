@@ -1,0 +1,37 @@
+Train:
+  batch_size: 128
+  learning_rate: 0.003
+  reg: 0.2
+  epochs: 2 
+  # steps: [900, 1200]   
+  warmup: 10
+  momentum: 0.9
+  # gamma: 0.5
+  scheduler: cosine
+  min_lr: 0.00001
+  optimizer: adamw     
+  nesterov: True           
+
+model:
+  type: "cct_6_3x1_32"
+  num_layers: 5        # Reduced from 6
+  embedding_dim: 128  # Reduced from 256
+  mlp_ratio: 2.0       # Reduced from 2.0
+  num_heads: 4   
+
+data:
+  save_best: False
+  dataset: Food101
+  img_size: 64
+  output_filename: CCT_default
+
+mlflow:
+  mlflow: True
+  experiment_name: CCT_Manual_Pruning
+  training_info: CCT Pruning
+  training_title: CCT Pruning
+
+pruning:
+  prune: False
+  prune_unstructured: 0.1
+  prune_structured: 0.1
